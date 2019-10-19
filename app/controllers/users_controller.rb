@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user, only: [:index,:show,:edit,:create,:update,:destroy]
   # GET /users
   # GET /users.json
   def index
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     @login_user = User.find_by(name: params[:name])
     respond_to do |format|
       if @login_user && @login_user.authenticate(params[:password])
-        session[:user_id]=@login_user.id
+        session[:user_id] = @login_user.id
         format.html { redirect_to users_path }
       else
         format.html { render :showlogin }
