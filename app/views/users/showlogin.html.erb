@@ -1,8 +1,8 @@
 <h1>login</h1>
-
+<%= flash[:alert] %>
 <%= form_with( url: users_login_path, local: true) do |form| %>
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "名前" %>
     <%= form.text_field :name %>
   </div>
 

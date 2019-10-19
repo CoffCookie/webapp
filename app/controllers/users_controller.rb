@@ -68,9 +68,10 @@ class UsersController < ApplicationController
     @login_user = User.find_by(name: params[:name])
     if @login_user && @login_user.authenticate(params[:password])
       session[:user_id]=@login_user.id
-      redirect_to("/users")
+      redirect_to(users_path)
     else
-      redirect_to("/")
+      flash[:alert] = "ユーザ名orパスワードが間違っています。"
+      redirect_to(users_showlogin_path)
     end
   end
 
