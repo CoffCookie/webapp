@@ -66,12 +66,24 @@ class UsersController < ApplicationController
 
   def login
     @login_user = User.find_by(name: params[:name])
-    if @login_user && @login_user.authenticate(params[:password])
-      session[:user_id]=@login_user.id
-      redirect_to(users_path)
-    else
-      flash[:alert] = "ユーザ名orパスワードが間違っています。"
-      redirect_to(users_showlogin_path)
+    respond_to do |format|
+      if @login_user && @login_user.authenticate(params[:password])
+        session[:user_id]=@login_user.id
+        format.html { redirect_to users_path }
+      else
+        format.html { render :showlogin }
+        flash[:alert] = "ユーザ名orパスワードが間違っています。"
+        #format.json { render json: @login_user.errors, status: :unprocessable_entity }
+=begin
+        errorとして認識されないから自前で。
+        @login_user.errors.full_messages.each do |message|
+          p "エラー#{message}"
+        end
+=end
+
+
+        #redirect_to(users_showlogin_path)
+      end
     end
   end
 

@@ -1,14 +1,24 @@
 <h1>login</h1>
-<%= flash[:alert] %>
 <%= form_with( url: users_login_path, local: true) do |form| %>
-  <div class="field">
+
+  <% if flash[:alert] %>
+    <div id="error_explanation">
+      <h2>prohibited this user from being saved:</h2>
+
+      <ul>
+      <%= flash[:alert] %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
     <%= form.label :name, "名前" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :class => 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :password, "パスワード" %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, :class => 'form-control' %>
   </div>
 
   <div class="actions">
