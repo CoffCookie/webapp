@@ -73,16 +73,6 @@ class UsersController < ApplicationController
       else
         format.html { render :showlogin }
         flash[:alert] = "ユーザ名orパスワードが間違っています。"
-        #format.json { render json: @login_user.errors, status: :unprocessable_entity }
-=begin
-        errorとして認識されないから自前で。
-        @login_user.errors.full_messages.each do |message|
-          p "エラー#{message}"
-        end
-=end
-
-
-        #redirect_to(users_showlogin_path)
       end
     end
   end
