@@ -29,13 +29,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         NotificationMailer.send_confirm_to_user(@user).deliver
-        format.html { redirect_to @user , notice: 'User was successfully created.' }
+        format.html { redirect_to users_createcomp_path , notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def createcomp
   end
 
   # PATCH/PUT /users/1
@@ -77,6 +80,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def showlogout
   end
 
