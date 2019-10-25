@@ -1,5 +1,5 @@
 class NotificationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "app150744842@heroku.com"
 
   def send_confirm_to_user(user)
     @user = user
